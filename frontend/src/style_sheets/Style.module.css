@@ -1,0 +1,613 @@
+
+
+.form-control{
+  border-radius: 20px;
+  }
+
+.card-body{
+
+    background-color: #ba9292;
+    opacity: 70%;
+    width:1600px;
+}  
+
+
+.rows{
+   color:black;
+   font-display:unset;
+  background-color: #d72929;
+  opacity:76%;
+  font-family: "Trebuchet MS", Verdana, sans-serif
+
+  ;
+
+
+}
+
+.rows2{
+  
+  color:black;
+  font-display:unset;
+ background-color: #d72929;
+ opacity:76%;
+ font-family: "Trebuchet MS", Verdana, sans-serif
+
+
+
+}
+
+
+.header2{
+
+   background-color: #d72929;
+   border-radius: 15px;
+   width: 1500px;
+   height:80px;
+   color:#cdd6f3;
+  
+
+
+
+}
+
+.header{
+
+   
+   color:rgb(255, 255, 255);
+   
+   width:1600px;
+}
+
+
+.PackDetails{
+
+
+  color:#d72929;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight:bold;
+
+}
+
+
+
+
+.tableHeaders{
+
+  color:#d72929;
+
+}
+
+.tableHeaders2{
+
+  color:#b40000;
+
+
+}
+
+
+
+.btnUpdate{
+  background-color: #00ac33;
+  border-radius: 50px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+}
+
+.btnDelete{
+
+  background-color: #c20000;
+  border-radius: 50px;
+  border-width: 5;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+  
+} 
+
+.btnSubmit{
+
+
+  background-color: #d72929;
+  border-radius: 30px;
+  border-width: 7;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  padding: 0 25px;
+  transition: all 200ms;
+  position:absolute;
+  right:580px;
+  height:40px;
+  width:20px;
+
+
+
+
+
+
+}
+
+
+.btnSubmit2{
+
+
+  background-color: #4619d8;
+  border-radius: 50px;
+  border-width: 5;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+
+
+}
+
+
+
+
+
+
+.btnHome{
+
+
+background-color: #f3f3f6;
+border-radius: 50px;
+border-width: 0;
+box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+color: #4619d8;
+cursor: pointer;
+display: inline-block;
+font-family: Arial, sans-serif;
+font-size: 1em;
+height: 30px;
+padding: 0 25px;
+text-align: center;
+transition: all 200ms;
+
+
+}
+
+
+.btnHomeFront{
+
+  background-color: #7552ea;
+  border-radius: 50px;
+  border-width: 5;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+
+
+
+}
+
+
+.btnReport{
+
+  background-color: #d20b0b;
+  border-radius: 50px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #fffdfd;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 25px;
+  text-align: center;
+  transition: all 200ms;
+
+
+}
+
+
+.btnBack{
+
+
+background-color: #767676;
+border-radius: 10px;
+border-width: 0;
+box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+color: #ffffff;
+cursor: pointer;
+display: inline-block;
+font-family: Arial, sans-serif;
+font-size: 1em;
+height: 30px;
+padding: 0 25px;
+text-align: center;
+transition: all 200ms;
+
+
+
+
+}
+
+
+.btnBack2{
+
+  background-color: #767676;
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 25px;
+  text-align: center;
+  transition: all 200ms;
+  position:absolute;
+  right:100px;
+  top:15px;
+
+
+}
+
+
+.btnUpdate2{
+
+  background-color: #00ac33
+  ;
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 25px;
+  text-align: center;
+  transition: all 200ms;
+
+}
+
+
+
+.BtnUpdateSp{
+
+
+  background-color: #008414;
+  border-radius: 50px;
+  border-width: 5;
+ 
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  height: 30px;
+  width:200px;
+  padding: 0 25px;
+  transition: all 200ms; width:100;
+ 
+
+
+}
+
+
+.logo{
+
+  border-radius: 30px;
+
+
+}
+
+
+.ManLetsgoo{
+
+
+  background-color: #c20000;
+  border-radius: 30px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(12, 132, 16, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 25px;
+  text-align: center;
+  transition: all 200ms;
+
+
+
+
+}
+
+
+.b1{
+
+  position:absolute;
+  right:700;
+  top:200;
+
+
+}
+
+
+
+
+
+
+
+.ManagerBody{
+
+  background-color: #cdd6f3;
+  opacity: 70%;
+  width:500px;
+  height:500px;
+  border-radius: 30px;
+
+}
+
+.ManagerCard{
+
+
+  background-color: #d72929;
+  opacity: 90%;
+  color:#980800; 
+  position:relative;
+  right:-10px;
+ font-family: Arial, sans-serif;
+ border-radius: 15px;
+ text-align: center;
+
+
+
+}
+
+
+.mangerInfo2{
+
+  background-color: #d72929;
+  opacity: 90%;
+  
+
+}
+
+.hh2{
+
+position: absolute;
+right:100px;
+
+
+
+
+} 
+
+
+.totPrice2{
+
+color:#e6150a;
+font-weight: bold;
+
+}
+
+.desti{
+
+
+  color:#11c101;
+  font-weight: bold;
+
+
+}
+
+.num{
+
+  font-weight: bold;
+
+}
+
+
+
+.tableH{
+
+  color:#d72929;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight:lighter;
+
+
+}
+
+/*Css for view all customer created packages */
+
+.si{
+
+
+  font-weight: bold;
+  font-size:larger;
+  color:#d72929;
+
+}
+
+.siname{
+
+  font-size:xx-large;
+  font-weight:initial;
+  color:#4619d8;
+
+
+}
+
+
+.BtnUpdateSp{
+
+  background-color: #270bda;
+  border-radius: 10px;
+  border-width: 5;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+  height: 40px;
+  width:150px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+}
+
+.BtnDeleSp{
+
+  background-color: #d81919;
+  border-radius: 10px;
+  border-width: 5;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+  height: 40px;
+  width:150px;
+  padding: 0 25px;
+  transition: all 200ms;
+
+
+}
+
+.SeeAllCuzPacks{
+
+
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  border-style:ridge;
+  border-bottom-right-radius: 4em;
+  background-clip: inherit;
+  background-color: #f1f1f1;
+  backface-visibility: visible;
+  right:500px;
+  border-color: #270bda;
+  color:#d72929;
+  
+
+
+
+
+
+}
+
+.userInputes{
+
+ color:#d72929;
+ font-size: larger;
+
+
+}
+
+/*Customer created packages ------ UPDATE---- CSS*/
+
+.CuzUpText{
+
+
+position: absolute;
+right:950px;
+top:15px;
+
+
+
+}
+
+/*Manage customer created packages */
+
+
+/* Header for manager cus package page */
+.header3{
+
+  background-color: #d72929;
+  border-radius: 15px;
+  width: 1500px;
+  height:80px;
+  color:#cdd6f3;
+  position: absolute;
+  right:0px;
+  scroll-padding-left: 200;
+
+}
+
+/* For home button */
+
+.btnHome2{
+
+
+  background-color: #c9ccd6;
+  border-radius: 50px;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #4619d8;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  height: 30px;
+  padding: 0 25px;
+  text-align: center;
+  transition: all 200ms;
+  position:absolute;
+  right:290px;
+  
+  
+  }
+
+/* Message part */
+
+.card-body6{
+
+
+position: absolute;
+top:1100px;
+background-color: #d72929;
+opacity: 70%;
+width:1600px;
+
+
+
+}
