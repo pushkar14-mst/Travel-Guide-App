@@ -27,7 +27,7 @@ const Signup = () => {
                 password
             }
     
-            axios.post("http://localhost:8070/user/new", newUser)
+            axios.post("http://127.0.0.1:8000/register", {name: newUser.full_name, username: newUser.user_name, password: newUser.password})
                 .then(() => {
                     alert("Registration Successful!");
                     history.push("/user/login");
