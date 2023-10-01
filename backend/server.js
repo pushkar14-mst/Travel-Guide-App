@@ -6,9 +6,20 @@ const dotenv=require('dotenv');
 const passport=require('passport');
 const cors=require('cors');
 const LocalStrategy=require('passport-local').Strategy;
+const jwt = require("jsonwebtoken");
 const JwtStrategy=require('passport-jwt').Strategy;
 const { ExtractJwt } = require("passport-jwt");
 const bcrypt=require('bcrypt');
+const session = require("express-session");
+
+app.use(
+  session({
+    secret: "f2feca#@425oI9",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true },
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -33,7 +44,7 @@ app.post("/register", async (req, res) => {
   const name = req.body.name;
   const username = req.body.username;
   let password = req.body.password;
-  console.log(name, username, password);
+  
   const takenUsername = User.findOne({ username: username });
 
   if (!takenUsername) {
@@ -81,6 +92,7 @@ app.post(
   "/login",
   passport.authenticate("local-login"),
   (req, res, next) => {
+    console.log(req.body);
     // login
     jwt.sign(
       { user: req.body },

@@ -41,7 +41,7 @@ const Login = (props) => {
 
     const login=async(e)=>{
         e.preventDefault();
-        await axios.post("http://127.0.0.1:8000/login",{user_name:userEnteredInfo.user_name,password:userEnteredInfo.password})
+        await axios.post("http://127.0.0.1:8000/login",{username:userEnteredInfo.user_name,password:userEnteredInfo.password})
         .then((response)=>{
             console.log(response.data);
             props.login(response.data);
