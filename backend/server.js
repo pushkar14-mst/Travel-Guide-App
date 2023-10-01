@@ -8,11 +8,13 @@ const cors=require('cors');
 const LocalStrategy=require('passport-local').Strategy;
 const JwtStrategy=require('passport-jwt').Strategy;
 const { ExtractJwt } = require("passport-jwt");
+const bcrypt=require('bcrypt');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
     origin:"http://127.0.0.1:3000",
+    allowedHeaders:"*",
 }));
 app.use(bodyParser.json());
 dotenv.config();
