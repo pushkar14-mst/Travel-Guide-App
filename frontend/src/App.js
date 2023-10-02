@@ -38,18 +38,23 @@ import findMyPack from './components/findMyPack';
 import AllPacks from './components/AllPacks';
 import EditPack from './components/PackUpdate'
 import guidereport from './components/guidereport';
-
-
-
+import ForgotPassword from "./components/ForgotPassword";
+import axios from "axios";
 const App = () => {
   const [userId, setUserId] = React.useState(null);
+  const [message, setMessage] = React.useState(null);
 
-  async function login(userId = null) {
+  async function login(userId) {
+    console.log(userId);
     setUserId(userId);
   }
 
   async function logout() {
     setUserId(null);
+    await axios.get("http://localhost:8000/logout")
+    .then((response)=>{
+        console.log(response.data);
+    })
   }
 
   return (
@@ -123,9 +128,12 @@ const App = () => {
 
             <Route
               path={`/profile/home/${userId}`}
-              render={(props) => <UserProfile {...props} userId={userId} />}
+              render={(props) => <UserProfile {...props} username={userId}/>}
             />
-
+            <Route
+              path="/forgot+password"
+              component={ForgotPassword}
+            />
             <Route
               path="/new+user/signup"
               component={Signup} 
@@ -135,7 +143,7 @@ const App = () => {
               path="/user/login"
               render={(props) => <Login {...props} login={login} />}
             />
-
+ 
             <Route
               path={`/view/payment+history/${userId}`}
               render={(props) => <PaymentHistory {...props} userId={userId} />}

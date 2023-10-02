@@ -43,13 +43,14 @@ const Login = (props) => {
         e.preventDefault();
         await axios.post("http://127.0.0.1:8000/login",{username:userEnteredInfo.user_name,password:userEnteredInfo.password})
         .then((response)=>{
-            console.log(response.data);
-            props.login(response.data);
-            props.history.push(`/profile/home/${response.data._id}`);
+            // console.log(response.data);
+            let username=response.data.user.username;
+            props.login(username);
+            props.history.push(`/profile/home/${response.data.user.username}`);
+        }).catch((err)=>{
+            alert("Username or password is wrong. Try Again!")
         })
-        .catch((err)=>{
-            console.log(err);
-        })
+        
     }
 
     return (
@@ -84,6 +85,10 @@ const Login = (props) => {
                         <div class="d-flex align-items-center justify-content-center pb-4">
                             <p class="mb-0 me-2">Don't have an account?</p>
                             <Link to={"/new+user/signup"}>Sign up</Link>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                          
+                            <Link to={"/forgot+password"}>Forgot Password</Link>
                         </div>
 
                     </div>

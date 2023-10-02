@@ -11,6 +11,7 @@ import covidImg from "../img/Safe.png"
 import priceImg from "../img/Prices.png"
 
 const Home = () => {
+    
     return (
         <>
         <div className={styleHome.container}>

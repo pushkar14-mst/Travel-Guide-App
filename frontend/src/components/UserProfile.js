@@ -11,13 +11,17 @@ import Profile from "./Profile";
 import illustration from "../img/login-first.png";
 import underCons from "../img/underCons.svg";
 
+//get username from the url box
+// console.log(username);
 const UserProfile = (props) => {
+   
+    let username=props.username;
     return (
         <>
-        {props.userId ? (
+        {username ? (
             <div className={stylesProfile.maincontainer}>
                 <div className={stylesProfile.side_bar}>
-                    <Profile {...props} userId={props.userId}/>
+                    <Profile username={username}/>
                 </div>
                 <div className={`text-center ${stylesProfile.nocard}`} style={{width: "1000px", padding: "70px 0px 70px 0px"}}>
                     <img src={underCons} alt="Logo" className={stylesProfile.illustration}/>

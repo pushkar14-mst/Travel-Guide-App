@@ -11,6 +11,8 @@ const JwtStrategy=require('passport-jwt').Strategy;
 const { ExtractJwt } = require("passport-jwt");
 const bcrypt=require('bcrypt');
 const session = require("express-session");
+const nodemailer = require("nodemailer");
+
 
 app.use(
   session({
@@ -74,9 +76,6 @@ passport.use(
       try {
         const user = await User.findOne({ username: username });
         if (!user) return done(null, false);
-
-        console.log(password);
-        console.log(user.password);
         const isMatch = bcrypt.compare(password, user.password);
         if (!isMatch) return done(null, false); // if passwords match return user
         return done(null, user);
@@ -142,7 +141,7 @@ passport.use(
       secretOrKey: process.env.JWT_SECRET,
     },
     (jwtPayload, done) => {
-      console.log(jwtPayload);
+    //   console.log(jwtPayload);
       User.findOne({ username: jwtPayload.username }, (err, user) => {
         if (err) {
           return done(err, false);
@@ -157,6 +156,68 @@ passport.use(
   )
 );
 
+app.post("/reset-password", (req, res) => {
+  let email = req.body.email;
+  // console.log(email);
+    
+  const generateOTP = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
+
+  // Email configuration
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.MAIL_ID,
+      pass: process.env.MAIL_PASSWORD 
+    }
+  });
+
+  // Function to send OTP to email address
+  
+  const OTP = generateOTP();
+
+  const mailOptions = {
+    from: process.env.MAIL_ID,
+    to: email,
+    subject: 'OTP Verification',
+    text: `Your OTP for verification is: ${OTP}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  res.json({ message: "OTP sent to your email" ,otp:OTP});
+});
+
+app.get("/logout", function (req, res) {
+  req.session.destroy(function () {
+    res.clearCookie("connect.sid"); //clears session id cookie
+    res.json({ message: "logged out!!!" });
+  });
+})
+app.get("/user/:username", (req, res) => {
+
+  const username = req.params.username;
+  User.findOne({ username: username }).then((user) => {
+    res.json({ user: user });
+  });
+});
 app.listen(8000,()=>{
     console.log("Server is running on port 8000");
 });
+
+
+app.post("/update-password", (req, res) => {
+  const username = req.body.username;
+  const newPassword = req.body.newPassword;
+  let user=User.findOne({ username: username })
+  if (!user) return console.log("user not found");
+  user.password = bcrypt.hashSync(newPassword, 10);
+  user.save();
+  res.json({ message: "password changed successfully!" });
+})
