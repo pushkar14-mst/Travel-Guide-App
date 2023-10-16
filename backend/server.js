@@ -12,7 +12,16 @@ const { ExtractJwt } = require("passport-jwt");
 const bcrypt=require('bcrypt');
 const session = require("express-session");
 const nodemailer = require("nodemailer");
+const {Client}=require('@duosecurity/duo_universal');
 
+dotenv.config();
+
+const duoClient=new Client({
+  clientId:process.env.DUO_CLIENT_ID,
+  clientSecret:process.env.DUO_CLIENT_SECRET,
+  apiHost:process.env.DUO_HOST,
+  redirectUrl:"http://localhost:8000/redirect",
+})
 
 app.use(
   session({
@@ -25,10 +34,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cors({
-    origin:"http://127.0.0.1:3000",
-    allowedHeaders:"*",
-}));
+app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 const url=process.env.MONGO_ATLAS_URL;
@@ -156,6 +162,57 @@ passport.use(
   )
 );
 
+
+app.post('/duo-auth',async(req,res)=>{
+  const username=req.body.username;
+  console.log("username coming for duo from client",username);
+  // const password=req.body.password;
+  if (!username ) {
+    return res.status(400).json({ message: "Missing username" });
+  }
+ 
+    await duoClient.healthCheck();
+    const state=duoClient.generateState();
+    req.session.duo={state,username};
+    console.log(req.session);
+    const authUrl=duoClient.createAuthUrl(username,state);
+
+    res.json({authUrl});
+  
+})
+
+app.get('/redirect',async(req,res)=>{
+  console.log("duo callback");
+  res.send("Authenticated Successfully, Please close this tab and go back to the app");
+  // const {query,session}=req;
+  // const {duo_code,state}=query;
+ 
+  // console.log(session);
+  // if (!duo_code || !state) {
+  //   return res.status(400).json({ message: "Missing duo_code or state" });
+  // }
+  // const savedState=session.duo?.state;
+  // const username=session.duo?.username;
+  // req.session.destroy();
+  // if (state !== savedState) {
+  //   return res.status(400).json({ message: "Invalid state" });
+  // }
+  // try {
+  //   const decodedToken = await duoClient.exchangeAuthorizationCodeFor2FAResult(
+  //       duo_code,
+  //       session.duo?.username
+  //     );
+  
+  //   if (result.status !== "allow") {
+  //     return res.status(401).json({ message: "Access denied" });
+  //   }
+  //   res.json({message:"success",data:decodedToken});
+    
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({message:"Internal Server Error"}); 
+  // }
+})
 app.post("/reset-password", (req, res) => {
   let email = req.body.email;
   // console.log(email);

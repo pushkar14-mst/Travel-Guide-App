@@ -42,9 +42,13 @@ const Login = (props) => {
     const login=async(e)=>{
         e.preventDefault();
         await axios.post("http://127.0.0.1:8000/login",{username:userEnteredInfo.user_name,password:userEnteredInfo.password})
-        .then((response)=>{
-            // console.log(response.data);
+        .then(async(response)=>{
+            console.log(response.data);
             let username=response.data.user.username;
+            await axios.post("http://127.0.0.1:8000/duo-auth",{username:username}).then((response)=>{
+                // console.log(response.data.authUrl);
+                window.open(response.data.authUrl, '_blank');
+            }).catch((err)=>{console.log(err)});
             props.login(username);
             props.history.push(`/profile/home/${response.data.user.username}`);
         }).catch((err)=>{
