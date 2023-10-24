@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //import css file from style sheets directory
@@ -19,9 +25,9 @@ import UserProfile from "./components/UserProfile";
 import PaymentHistory from "./components/PaymentHistory";
 import PrintPayments from "./components/PrintPayment";
 import Checkout from "./components/Checkout";
-import AddTourguide from './components/AddTourguide';
-import AllTourguides from './components/AllTourguides';
-import updateTourguide from './components/UpdateTourguide';
+import AddTourguide from "./components/AddTourguide";
+import AllTourguides from "./components/AllTourguides";
+import updateTourguide from "./components/UpdateTourguide";
 import AddHotel from "./components/AddHotel";
 import BookingHotel from "./components/BookingHotel";
 import Navbar from "./components/Navbar";
@@ -29,15 +35,15 @@ import AllHotel from "./components/AllHotel";
 import EditHotel from "./components/EditHotel";
 import ViewHotel from "./components/ViewHotel";
 import report from "./components/report";
-import AddPackage from './components/addPackage';
+import AddPackage from "./components/addPackage";
 import manager from "./components/PackManager";
-import sith from './components/edit';
-import cusPack from './components/CustomerPack';
-import CusPackage from './components/customizePackage';
-import findMyPack from './components/findMyPack';
-import AllPacks from './components/AllPacks';
-import EditPack from './components/PackUpdate'
-import guidereport from './components/guidereport';
+import sith from "./components/edit";
+import cusPack from "./components/CustomerPack";
+import CusPackage from "./components/customizePackage";
+import findMyPack from "./components/findMyPack";
+import AllPacks from "./components/AllPacks";
+import EditPack from "./components/PackUpdate";
+import guidereport from "./components/guidereport";
 import ForgotPassword from "./components/ForgotPassword";
 import axios from "axios";
 const App = () => {
@@ -51,21 +57,19 @@ const App = () => {
 
   async function logout() {
     setUserId(null);
-    await axios.get("http://localhost:8000/logout")
-    .then((response)=>{
-        console.log(response.data);
-    })
+    await axios.get("http://localhost:8000/logout").then((response) => {
+      console.log(response.data);
+    });
   }
 
   return (
     <Router>
-      <div className="App min-vh-100" style={{backgroundColor: "#f7f7f7"}}>
+      <div className="App min-vh-100" style={{ backgroundColor: "#f7f7f7" }}>
         <nav className={`navbar-fixed-top ${styles.nav}`}>
           <div className={`container ${styles.parentnav}`}>
             <img src={logo} alt="Travelo logo" className={styles.logo}></img>
             <div className={styles.topnav_center}>
               <ul>
-
                 <li>
                   <Link to={`/home`}>Home</Link>
                 </li>
@@ -86,33 +90,37 @@ const App = () => {
                 <li>
                   <Link to={`/profile/home/${userId}`}>Profile</Link>
                 </li>
-
               </ul>
             </div>
             {userId ? (
               <>
-                <Link to={'/home'} onClick={logout} className={styles.btn_login}>Logout</Link>
+                <Link
+                  to={"/home"}
+                  onClick={logout}
+                  className={styles.btn_login}
+                >
+                  Logout
+                </Link>
               </>
             ) : (
               <>
-                <Link to={"/user/login"} className={styles.btn_login}>Login</Link>
+                <Link to={"/user/login"} className={styles.btn_login}>
+                  Login
+                </Link>
               </>
             )}
           </div>
         </nav>
         <div>
           <Switch>
-            
             <Route exact path="/">
               <Redirect to="/home" />
             </Route>
 
-            <Route
-              path="/home"
-              component={Home} 
-            />
+            <Route path="/home" component={Home} />
 
-            <Route path="/add/payment+details"
+            <Route
+              path="/add/payment+details"
               render={(props) => <AddPayment {...props} userId={userId} />}
             />
 
@@ -128,22 +136,16 @@ const App = () => {
 
             <Route
               path={`/profile/home/${userId}`}
-              render={(props) => <UserProfile {...props} username={userId}/>}
+              render={(props) => <UserProfile {...props} username={userId} />}
             />
-            <Route
-              path="/forgot+password"
-              component={ForgotPassword}
-            />
-            <Route
-              path="/new+user/signup"
-              component={Signup} 
-            />
+            <Route path="/forgot+password" component={ForgotPassword} />
+            <Route path="/new+user/signup" component={Signup} />
 
             <Route
               path="/user/login"
               render={(props) => <Login {...props} login={login} />}
             />
- 
+
             <Route
               path={`/view/payment+history/${userId}`}
               render={(props) => <PaymentHistory {...props} userId={userId} />}
@@ -159,122 +161,59 @@ const App = () => {
               render={(props) => <Checkout {...props} userId={userId} />}
             />
 
-            <Route 
-              path= {["/all/tourguide"]}
-              component = {AllTourguides}
+            <Route path={["/all/tourguide"]} component={AllTourguides} />
+
+            <Route path={["/add/tourguide"]} component={AddTourguide} />
+
+            <Route
+              path={["/update/tourguide/:id"]}
+              component={updateTourguide}
             />
 
-            <Route 
-              path= {["/add/tourguide"]}
-              component = {AddTourguide} 
+            <Route
+              path={["/update/tourguide/:id"]}
+              component={updateTourguide}
             />
 
-            <Route 
-              path= {["/update/tourguide/:id"]}
-              component = {updateTourguide} 
+            <Route
+              path={["/update/tourguide/:id"]}
+              component={updateTourguide}
             />
 
+            <Route path={["/admin/hotel"]} component={Navbar} />
 
-            <Route 
-              path= {["/update/tourguide/:id"]}
-              component = {updateTourguide} 
-            />
+            <Route path={["/add/hotel"]} component={AddHotel} />
 
-            <Route 
-              path= {["/update/tourguide/:id"]}
-              component = {updateTourguide} 
-            />
+            <Route path={["/all/hotel"]} component={AllHotel} />
 
-            <Route 
-              path={["/admin/hotel"]}
-              component={Navbar}
-            />
+            <Route path="/update/hotel/:id" component={EditHotel} />
 
-            <Route 
-              path={["/add/hotel"]}
-              component={AddHotel}
-            />
+            <Route path={["/print/hotel"]} component={report} />
 
-            <Route 
-              path={["/all/hotel"]}
-              component={AllHotel}
-            />
+            <Route path={["/view/hotel"]} component={ViewHotel} />
 
-            <Route 
-              path="/update/hotel/:id"
-              component={EditHotel}
-            />
+            <Route path={["/insert/hotel"]} component={BookingHotel} />
 
-            <Route 
-              path={["/print/hotel"]}
-              component={report}
-            />
+            <Route path={["/landing/page"]} component={Navbar} />
 
-            <Route 
-              path={["/view/hotel"]}
-              component={ViewHotel}
-            />
-            
-            <Route 
-              path={["/insert/hotel"]}
-              component={BookingHotel}
-            />
+            <Route path={["/add/package"]} component={AddPackage} />
 
-            <Route 
-              path={["/landing/page"]}
-              component={Navbar}
-            />
+            <Route path={["/view/cuspackage"]} component={sith} />
 
+            <Route path={["/search/destination"]} component={cusPack} />
 
-            <Route 
-              path= {["/add/package"]}
-              component = {AddPackage} 
-            />
+            <Route path={["/edit/cusPack"]} component={CusPackage} />
 
-            <Route 
-              path= {["/view/cuspackage"]}
-              component = {sith} 
-            />
+            <Route path={["/find/cusPack"]} component={findMyPack} />
 
-            <Route 
-              path= {["/search/destination"]}
-              component = {cusPack} 
-            />
+            <Route path={["/page/manager"]} component={manager} />
 
-            <Route 
-              path= {["/edit/cusPack"]}
-              component = {CusPackage} 
-            />
+            <Route path={["/manage/AllPacks"]} component={AllPacks} />
 
-            <Route 
-              path= {["/find/cusPack"]}
-              component = {findMyPack} 
-            />
+            <Route path={["/update/packs/id"]} component={EditPack} />
+            <Route exact path={["/guidereport"]} component={guidereport} />
 
-            <Route 
-              path= {["/page/manager"]}
-              component = {manager} 
-            />
-
-            <Route 
-              path= {["/manage/AllPacks"]}
-              component = {AllPacks} 
-            />
-
-             <Route 
-              path= {["/update/packs/id"]}
-              component = {EditPack} 
-            />
-            <Route exact path= {["/guidereport"]} component = {guidereport} />
-  
-  <Route 
-  path ="/guidereport"
-  component={guidereport}
-/>
-
-            
-
- 
+            <Route path="/guidereport" component={guidereport} />
           </Switch>
         </div>
       </div>
