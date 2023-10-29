@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-//import Tourguide from "../../../Tourguide/BACKEND/models/Tourguide";
 
 export default class AllTourguides extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       tourguides: [],
     };
@@ -19,7 +17,6 @@ export default class AllTourguides extends Component {
       this.setState({
         tourguides: res.data.tourguides,
       });
-
       console.log(this.state.tourguides);
     });
   }

@@ -37,7 +37,7 @@ import ViewHotel from "./components/ViewHotel";
 import report from "./components/report";
 import AddPackage from "./components/addPackage";
 import manager from "./components/PackManager";
-import sith from "./components/edit";
+import sith from "./components/CustomerPackageView";
 import cusPack from "./components/CustomerPack";
 import CusPackage from "./components/customizePackage";
 import findMyPack from "./components/findMyPack";
@@ -46,6 +46,7 @@ import EditPack from "./components/PackUpdate";
 import guidereport from "./components/guidereport";
 import ForgotPassword from "./components/ForgotPassword";
 import axios from "axios";
+import CustomerPackageView from "./components/CustomerPackageView";
 const App = () => {
   const [userId, setUserId] = React.useState(null);
   const [message, setMessage] = React.useState(null);
@@ -198,7 +199,10 @@ const App = () => {
 
             <Route path={["/add/package"]} component={AddPackage} />
 
-            <Route path={["/view/cuspackage"]} component={sith} />
+            <Route
+              path={["/view/cuspackage"]}
+              component={CustomerPackageView}
+            />
 
             <Route path={["/search/destination"]} component={cusPack} />
 

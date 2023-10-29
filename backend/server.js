@@ -117,9 +117,74 @@ const TourGuideSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+const RoomSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
+  no_of_rooms: {
+    type: String,
+    required: true,
+  },
+  no_of_guest: {
+    type: String,
+    required: true,
+  },
+  check_in_date: {
+    type: String,
+  },
+  check_out_date: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const PackageSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
+  name: {
+    type: String,
+  },
+  packId: {
+    type: String,
+  },
+  destination: {
+    type: String,
+  },
+  numofdays: {
+    type: String,
+  },
+  nopass: {
+    type: String,
+  },
+  hotel: {
+    type: String,
+  },
+  transport: {
+    type: String,
+  },
+  tourGuide: {
+    type: String,
+  },
+  totPrice: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 const User = mongoose.model("User", userSchema);
 const Hotel = mongoose.model("Hotel", hotelSchema);
 const TourGuide = mongoose.model("TourGuide", TourGuideSchema);
+const Room = mongoose.model("Room", RoomSchema);
+const Package = mongoose.model("Package", PackageSchema);
 app.post("/register", async (req, res) => {
   const name = req.body.name;
   const username = req.body.username;
@@ -382,6 +447,46 @@ app.post("/add-tourguide", async (req, res) => {
 app.get("/all-tourguides", async (req, res) => {
   const tourguides = await TourGuide.find();
   res.json({ tourguides: tourguides });
+});
+
+/* Tour Package Ops */
+
+app.post("/add-package", async (req, res) => {
+  let name = req.body.name;
+  let packId = req.body.packId;
+  let destination = req.body.destination;
+  let numofdays = req.body.numofdays;
+  let nopass = req.body.nopass;
+  let hotel = req.body.hotel;
+  let transport = req.body.transport;
+  let tourGuide = req.body.tourGuide;
+  let totPrice = req.body.totPrice;
+  const checkIfPackageExists = await Package.findOne({ packId: packId });
+  if (checkIfPackageExists) {
+    return res.json({ message: "Package already exist" });
+  }
+  try {
+    let package = new Package({
+      name: name,
+      packId: packId,
+      destination: destination,
+      numofdays: numofdays,
+      nopass: nopass,
+      hotel: hotel,
+      transport: transport,
+      tourGuide: tourGuide,
+      totPrice: totPrice,
+    });
+    await package.save();
+    res.json({ message: "Package Added Successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/all-packages", async (req, res) => {
+  const packages = await Package.find();
+  res.json({ packages: packages });
 });
 
 app.listen(8000, () => {
