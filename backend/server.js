@@ -160,9 +160,7 @@ const PackageSchema = new mongoose.Schema({
   numofdays: {
     type: String,
   },
-  nopass: {
-    type: String,
-  },
+
   hotel: {
     type: String,
   },
@@ -456,7 +454,7 @@ app.post("/add-package", async (req, res) => {
   let packId = req.body.packId;
   let destination = req.body.destination;
   let numofdays = req.body.numofdays;
-  let nopass = req.body.nopass;
+
   let hotel = req.body.hotel;
   let transport = req.body.transport;
   let tourGuide = req.body.tourGuide;
@@ -471,7 +469,6 @@ app.post("/add-package", async (req, res) => {
       packId: packId,
       destination: destination,
       numofdays: numofdays,
-      nopass: nopass,
       hotel: hotel,
       transport: transport,
       tourGuide: tourGuide,

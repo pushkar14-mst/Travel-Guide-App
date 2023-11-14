@@ -1,0 +1,88 @@
+.tourDetailContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 8rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#tourCode {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 8px;
+  background-color: rgb(165, 255, 100);
+  border-radius: 8px;
+  margin: 20px;
+}
+.tourDetailComponents {
+  display: flex;
+  flex-direction: column;
+}
+.tourDetailImage {
+  width: 100%;
+  height: 50vh;
+  /* object-fit: cover; */
+  margin-bottom: 2rem;
+}
+.tourDetailImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tourMajorDetails {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+  width: 100%;
+  gap: 2rem;
+}
+.tourMajorDetails div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #2c3e50;
+  background-color: #7ffe76;
+  border-radius: 8px;
+  padding: 8px;
+}
+.tourMajorDetails div p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+.tourMajorDetails div h1 {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.Facilities {
+  font-size: 1.5rem;
+}
+.tourDetailDescription p {
+  font-size: 1.5rem;
+  text-align: justify;
+  color: #2c3e50;
+}
+.tourItinerary {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.tourItinerary h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+.tourItinerary p {
+  font-size: 1.5rem;
+  text-align: justify;
+  color: #2c3e50;
+}
+.dayDetails {
+  width: 100%;
+}

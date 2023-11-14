@@ -11,7 +11,7 @@ function AddPackage() {
   const [packId, setPid] = useState("");
   const [destination, setDesti] = useState("");
   const [numofdays, setDays] = useState("");
-  const [nopass, setPass] = useState("");
+
   const [hotel, setHotel] = useState("");
   const [transport, setTrans] = useState("");
   const [tourGuide, setGuide] = useState("");
@@ -25,7 +25,6 @@ function AddPackage() {
       packId,
       destination,
       numofdays,
-      nopass,
       hotel,
       transport,
       tourGuide,
@@ -42,7 +41,7 @@ function AddPackage() {
       packId,
       destination,
       numofdays,
-      nopass,
+
       hotel,
       transport,
       tourGuide,
@@ -150,7 +149,7 @@ function AddPackage() {
               class="form-control"
               id="numDays"
               min="1"
-              max="7"
+              max="30"
               placeholder="Enter days between 1 and 7"
               onChange={(e) => {
                 setDays(e.target.value);
@@ -158,23 +157,6 @@ function AddPackage() {
             />
           </div>
           <br></br>
-
-          <div className="form-group" style={{ width: "500px" }}>
-            <label for="numPass">
-              <strong>Number of passengers *</strong>
-            </label>
-            <input
-              type="number"
-              class="form-control"
-              id="numPass"
-              min="1"
-              max="15"
-              placeholder="Enter passengers between 1 and 15"
-              onChange={(e) => {
-                setPass(e.target.value);
-              }}
-            />
-          </div>
         </div>
         <br></br>
         <div style={{ position: "absolute", top: 220, right: 300 }}>
@@ -200,7 +182,6 @@ function AddPackage() {
             </select>
           </div>
           <br></br>
-
           <div className="form-group" style={{ width: "500px" }}>
             <label for="transport">
               <strong>Transport</strong>
@@ -243,7 +224,6 @@ function AddPackage() {
             </select>
           </div>
           <br></br>
-
           <div className="form-group" style={{ width: "500px" }}>
             <label for="price">
               <strong>Total price(Rs) *</strong>
@@ -258,6 +238,7 @@ function AddPackage() {
               }}
             />
           </div>
+          <br></br>
         </div>
         <button
           type="submit"

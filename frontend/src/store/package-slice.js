@@ -27,6 +27,9 @@ const packageSlice = createSlice({
       state.tourGuide = action.payload.tourGuide;
       state.totPrice = action.payload.totPrice;
     },
+    currentPackage(state, action) {
+      state.packId = action.payload.packId;
+    },
   },
 });
 

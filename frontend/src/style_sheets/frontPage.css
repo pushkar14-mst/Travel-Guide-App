@@ -1,97 +1,41 @@
-.header22{
- 
-
- font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
- color:#d72929;
- 
- 
+.header22 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #d72929;
 }
-
-.pic1{
-
- border-radius: 6ch;
- border-color: blue;
- position:absolute;
- right:1100px;
- width: 400px;
- height:300px
+.filter-box {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  background-color: chartreuse;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem;
+  width: 60%;
+  height: auto;
+  padding: 1rem;
 }
-
-
-
-.pic2{
-
-    border-radius: 6ch;
-    border-color: blue;
-    position:absolute;
-    top:190px;
-    right:380px;
-    width: 400px;
-    height:300px
-
+.filter-box-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.pic3{
-
-    border-radius: 6ch;
-    border-color: blue;
-    position:absolute;
-    top:510px;
-    right:380px;
-    width: 400px;
-    height:300px
-
-
-
+.filter-box-body-item {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d72929;
 }
-
-.pic4{
-
-    border-radius: 6ch;
-    border-color: blue;
-    position:absolute;
-    top:320px;
-    right:1100px;
-    width: 400px;
-    height:300px
-
+.filter-box-body button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d72929;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
 }
-
-.pic5{
-
-    border-radius: 6ch;
-    border-color: blue;
-    position:absolute;
-    top:640px;
-    right:1100px;
-    width: 400px;
-    height:300px
-
-
-
-
+.name {
+  font-weight: 300;
+  font-family: fantasy;
 }
-
-.pic6{
-
-
-    border-radius: 6ch;
-    border-color: blue;
-    position:absolute;
-    top:640px;
-    right:380px;
-    width: 400px;
-    height:300px
-
-
-}
-
-.name{
-
- font-weight: 300;
- font-family: fantasy;
-
-
-
-}
-

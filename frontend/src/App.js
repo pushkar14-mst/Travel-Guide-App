@@ -47,6 +47,7 @@ import guidereport from "./components/guidereport";
 import ForgotPassword from "./components/ForgotPassword";
 import axios from "axios";
 import CustomerPackageView from "./components/CustomerPackageView";
+import TourDetail from "./pages/TourDetail";
 const App = () => {
   const [userId, setUserId] = React.useState(null);
   const [message, setMessage] = React.useState(null);
@@ -203,7 +204,7 @@ const App = () => {
               path={["/view/cuspackage"]}
               component={CustomerPackageView}
             />
-
+            <Route path={["/tour-detail"]} component={TourDetail} />
             <Route path={["/search/destination"]} component={cusPack} />
 
             <Route path={["/edit/cusPack"]} component={CusPackage} />
