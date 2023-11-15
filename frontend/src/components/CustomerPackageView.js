@@ -10,6 +10,7 @@ import "../style_sheets/frontPage.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { packageActions } from "../store/package-slice";
 const CustomerPackageView = () => {
   const [packages, setPackages] = React.useState([]);
   const [destination, setDestination] = React.useState("");
@@ -175,10 +176,13 @@ const CustomerPackageView = () => {
                       }}
                     >
                       <h4>
-                        <Link to={`/tour-detail`}>
-                          <a class="name">
-                            <strong>{pack.name}</strong>
-                          </a>
+                        <Link
+                          to={`/tour-detail`}
+                          onClick={() => {
+                            dispatch(packageActions.currentPackage(pack.name));
+                          }}
+                        >
+                          <strong>{pack.name}</strong>
                         </Link>
                       </h4>
                       Destination - {pack.destination} <br></br>

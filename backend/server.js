@@ -177,6 +177,9 @@ const PackageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  dayWiseItinerary: {
+    type: Array,
+  },
 });
 const User = mongoose.model("User", userSchema);
 const Hotel = mongoose.model("Hotel", hotelSchema);
@@ -227,7 +230,7 @@ passport.use(
 );
 
 app.post("/login", passport.authenticate("local-login"), (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   // login
   jwt.sign(
     { user: req.body },
@@ -251,6 +254,35 @@ app.post("/login", passport.authenticate("local-login"), (req, res, next) => {
       });
     }
   );
+});
+app.post("/admin-login", (req, res) => {
+  if (
+    req.body.adminEmail === process.env.ADMIN_EMAIL &&
+    req.body.adminPassword === process.env.ADMIN_PASSWORD
+  ) {
+    jwt.sign(
+      { user: req.body },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+      (err, token) => {
+        if (err) {
+          return res.json({
+            message: "Failed to login",
+            token: null,
+          });
+        }
+        res.json({
+          isAdmin: true,
+          token,
+        });
+      }
+    );
+  } else {
+    res.json({
+      isAdmin: false,
+      token: null,
+    });
+  }
 });
 
 passport.serializeUser(function (user, cb) {
@@ -454,11 +486,12 @@ app.post("/add-package", async (req, res) => {
   let packId = req.body.packId;
   let destination = req.body.destination;
   let numofdays = req.body.numofdays;
-
   let hotel = req.body.hotel;
   let transport = req.body.transport;
   let tourGuide = req.body.tourGuide;
   let totPrice = req.body.totPrice;
+  let date = req.body.date;
+  let dayWiseItinerary = req.body.dayWiseItinerary;
   const checkIfPackageExists = await Package.findOne({ packId: packId });
   if (checkIfPackageExists) {
     return res.json({ message: "Package already exist" });
@@ -473,6 +506,8 @@ app.post("/add-package", async (req, res) => {
       transport: transport,
       tourGuide: tourGuide,
       totPrice: totPrice,
+      date: date,
+      dayWiseItinerary: dayWiseItinerary,
     });
     await package.save();
     res.json({ message: "Package Added Successfully" });

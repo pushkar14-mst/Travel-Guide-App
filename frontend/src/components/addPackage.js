@@ -3,7 +3,7 @@ import axios from "axios";
 import myStyle from "../style_sheets/Style.module.css";
 import galle from "../img/Travelo.jpeg";
 import create from "../img/Create package.jpg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { packageActions } from "../store/package-slice";
 
 function AddPackage() {
@@ -11,13 +11,23 @@ function AddPackage() {
   const [packId, setPid] = useState("");
   const [destination, setDesti] = useState("");
   const [numofdays, setDays] = useState("");
-
   const [hotel, setHotel] = useState("");
   const [transport, setTrans] = useState("");
   const [tourGuide, setGuide] = useState("");
   const [totPrice, setPrice] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [tourDate, setTourDate] = useState("");
+  const [dayWiseItinerary, setDayWiseItinerary] = useState([
+    {
+      noOfCities: 0,
+      noOfActivities: 0,
+      cities: [],
+      activities: [],
+      description: " ",
+    },
+  ]);
   const dispatch = useDispatch();
+
+  const inputArray = Array.from({ length: numofdays }, (_, index) => index);
 
   dispatch(
     packageActions.addPackage({
@@ -29,10 +39,10 @@ function AddPackage() {
       transport,
       tourGuide,
       totPrice,
+      tourDate,
+      dayWiseItinerary,
     })
   );
-
-  // (local function) sendData(e: any):void
   async function sendData(e) {
     e.preventDefault();
 
@@ -41,11 +51,12 @@ function AddPackage() {
       packId,
       destination,
       numofdays,
-
       hotel,
       transport,
       tourGuide,
       totPrice,
+      tourDate,
+      dayWiseItinerary,
     };
 
     await axios
@@ -119,6 +130,20 @@ function AddPackage() {
             />
           </div>
           <br></br>
+          <div className="form-group" style={{ width: "500px" }}>
+            <label for="id">
+              <strong>Package Date</strong>*
+            </label>
+            <input
+              type="date"
+              class="form-control"
+              id="packDate"
+              placeholder="Enter Date here"
+              onChange={(e) => {
+                setPid(e.target.value);
+              }}
+            />
+          </div>
 
           <div
             class="form-row"
@@ -150,7 +175,7 @@ function AddPackage() {
               id="numDays"
               min="1"
               max="30"
-              placeholder="Enter days between 1 and 7"
+              placeholder="Enter duration of the package"
               onChange={(e) => {
                 setDays(e.target.value);
               }}
@@ -239,6 +264,181 @@ function AddPackage() {
             />
           </div>
           <br></br>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {inputArray.map((i) => (
+            <div key={i}>
+              <label for="day">
+                <strong>Day {i + 1}</strong>
+              </label>
+              <div
+                className="form-group"
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  gap: "10px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <textarea
+                  class="form-control"
+                  id="day"
+                  placeholder="Enter day description"
+                  onChange={(e) => {
+                    setDayWiseItinerary((prev) => {
+                      const newDayWiseItinerary = prev.map((day) =>
+                        day.day === i + 1
+                          ? { ...day, description: e.target.value }
+                          : day
+                      );
+
+                      if (
+                        !newDayWiseItinerary.some((day) => day.day === i + 1)
+                      ) {
+                        newDayWiseItinerary.push({
+                          day: i + 1,
+                          description: e.target.value,
+                          cities: [],
+                          activities: [],
+                          noOfActivities: 0,
+                          noOfCities: 0,
+                        });
+                      }
+
+                      return newDayWiseItinerary;
+                    });
+                  }}
+                  rows="3"
+                />
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="No of Activities"
+                  onChange={(e) => {
+                    setDayWiseItinerary((prev) => {
+                      const newDayWiseItinerary = prev.map((day) =>
+                        day.day === i + 1
+                          ? { ...day, noOfActivities: Number(e.target.value) }
+                          : day
+                      );
+
+                      if (
+                        !newDayWiseItinerary.some((day) => day.day === i + 1)
+                      ) {
+                        newDayWiseItinerary.push({
+                          day: i + 1,
+                          description: "",
+                          cities: [],
+                          activities: [],
+                          noOfActivities: Number(e.target.value),
+                          noOfCities: 0,
+                        });
+                      }
+
+                      return newDayWiseItinerary;
+                    });
+                  }}
+                />
+
+                {Array.from(
+                  {
+                    length: dayWiseItinerary[i + 1]?.noOfActivities || 0,
+                  },
+                  (_, j) => j
+                ).map((_, j) => {
+                  // console.log("here", dayWiseItinerary[j]);
+                  return (
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={`Activity ${j + 1}`}
+                        className="form-control"
+                        onChange={(e) => {
+                          setDayWiseItinerary((prev) => {
+                            return prev.map((day) =>
+                              day.day === i + 1
+                                ? {
+                                    ...day,
+                                    activities: [
+                                      ...day.activities.slice(0, j),
+                                      e.target.value,
+                                      ...day.activities.slice(j + 1),
+                                    ],
+                                  }
+                                : day
+                            );
+                          });
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+
+                <input
+                  type="number"
+                  class="form-control"
+                  id="numOfCities"
+                  placeholder="Enter No of Cities Covered in this day"
+                  onChange={(e) => {
+                    setDayWiseItinerary((prev) => {
+                      const newDayWiseItinerary = prev.map((day) =>
+                        day.day === i + 1
+                          ? { ...day, noOfCities: Number(e.target.value) }
+                          : day
+                      );
+
+                      if (
+                        !newDayWiseItinerary.some((day) => day.day === i + 1)
+                      ) {
+                        newDayWiseItinerary.push({
+                          day: i + 1,
+                          description: "",
+                          cities: [],
+                          activities: [],
+                          noOfActivities: 0,
+                          noOfCities: Number(e.target.value),
+                        });
+                      }
+
+                      return newDayWiseItinerary;
+                    });
+                  }}
+                />
+
+                {Array.from(
+                  { length: dayWiseItinerary[i + 1]?.noOfCities || 0 },
+                  (_, j) => j
+                ).map((_, j) => {
+                  return (
+                    <div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder={`Name of City ${j + 1}`}
+                        onChange={(e) => {
+                          setDayWiseItinerary((prev) => {
+                            return prev.map((day) =>
+                              day.day === i + 1
+                                ? {
+                                    ...day,
+                                    cities: [
+                                      ...day.cities.slice(0, j),
+                                      e.target.value,
+                                      ...day.cities.slice(j + 1),
+                                    ],
+                                  }
+                                : day
+                            );
+                          });
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <br></br>
+            </div>
+          ))}
         </div>
         <button
           type="submit"

@@ -10,6 +10,8 @@ let initialState = {
   transport: "",
   tourGuide: "",
   totPrice: "",
+  date: "",
+  dayWiseItinerary: [],
 };
 
 const packageSlice = createSlice({
@@ -26,9 +28,12 @@ const packageSlice = createSlice({
       state.transport = action.payload.transport;
       state.tourGuide = action.payload.tourGuide;
       state.totPrice = action.payload.totPrice;
+      state.date = action.payload.date;
+      state.dayWiseItinerary = action.payload.dayWiseItinerary;
+      console.log(state.dayWiseItinerary);
     },
     currentPackage(state, action) {
-      state.packId = action.payload.packId;
+      state.name = action.payload;
     },
   },
 });
