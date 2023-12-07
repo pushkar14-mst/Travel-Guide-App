@@ -36,17 +36,17 @@ const Login = (props) => {
       .then(async (response) => {
         console.log(response.data);
         let username = response.data.user.username;
-        await axios
-          .post("https://travel-guide-app-i1tf.vercel.app/duo-auth", {
-            username: username,
-          })
-          .then((response) => {
-            // console.log(response.data.authUrl);
-            window.open(response.data.authUrl, "_blank");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        // await axios
+        //   .post("https://travel-guide-app-i1tf.vercel.app/duo-auth", {
+        //     username: username,
+        //   })
+        //   .then((response) => {
+        //     // console.log(response.data.authUrl);
+        //     window.open(response.data.authUrl, "_blank");
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
         props.login(username);
         dispatch(loginManagementActions.loginUser({ username }));
         props.history.push(`/profile/home/${response.data.user.username}`);
