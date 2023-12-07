@@ -48,7 +48,7 @@ export default class ViewHotel extends Component {
     this.retriveHotels();
   }
   retriveHotels() {
-    axios.get("http://127.0.0.1:8000/all-hotels").then((res) => {
+    axios.get("https://travel-guide-app.vercel.app/all-hotels").then((res) => {
       if (res.data.success) {
         this.setState({
           hotels: res.data.existingHotels,
@@ -78,7 +78,7 @@ export default class ViewHotel extends Component {
 
   handleTextSearch = (e) => {
     const searchTerm = e.currentTarget.value;
-    axios.get("http://127.0.0.1:8000/all-hotels").then((res) => {
+    axios.get("https://travel-guide-app.vercel.app/all-hotels").then((res) => {
       console.log(res.data.hotels);
       this.filterContent(res.data.hotels, searchTerm);
     });

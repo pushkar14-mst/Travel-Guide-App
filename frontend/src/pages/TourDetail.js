@@ -22,18 +22,22 @@ const TourDetail = () => {
   // console.log(packId);
 
   const retrievePackage = async () => {
-    await axios.get("http://127.0.0.1:8000/all-packages").then((res) => {
-      setPackages(res.data.packages);
-    });
+    await axios
+      .get("https://travel-guide-app.vercel.app/all-packages")
+      .then((res) => {
+        setPackages(res.data.packages);
+      });
   };
   const retrieveUser = async () => {
-    await axios.get("http://127.0.0.1:8000/all-users").then((res) => {
-      res.data.users.map((user) => {
-        if (user.username === loggedInUser) {
-          setUser(user);
-        }
+    await axios
+      .get("https://travel-guide-app.vercel.app/all-users")
+      .then((res) => {
+        res.data.users.map((user) => {
+          if (user.username === loggedInUser) {
+            setUser(user);
+          }
+        });
       });
-    });
   };
   const handleBookingRequest = async () => {
     if (loggedInUser === "") {
