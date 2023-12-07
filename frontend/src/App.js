@@ -48,6 +48,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import axios from "axios";
 import CustomerPackageView from "./components/CustomerPackageView";
 import TourDetail from "./pages/TourDetail";
+import PackManager from "./components/PackManager";
 const App = () => {
   const [userId, setUserId] = React.useState(null);
   const [message, setMessage] = React.useState(null);
@@ -211,7 +212,7 @@ const App = () => {
 
             <Route path={["/find/cusPack"]} component={findMyPack} />
 
-            <Route path={["/page/manager"]} component={manager} />
+            <Route path={["/page/manager"]} component={PackManager} />
 
             <Route path={["/manage/AllPacks"]} component={AllPacks} />
 

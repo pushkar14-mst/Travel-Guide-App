@@ -9,21 +9,78 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import Button from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const TourDetail = () => {
   const [packages, setPackages] = React.useState([]);
+  const [user, setUser] = React.useState(null);
   const selector = useSelector((state) => state.package);
   const packName = selector?.name;
+  const loggedInUser = useSelector((state) => state.userLogin.username);
   // console.log(packId);
+
   const retrievePackage = async () => {
     await axios.get("http://127.0.0.1:8000/all-packages").then((res) => {
       setPackages(res.data.packages);
     });
   };
+  const retrieveUser = async () => {
+    await axios.get("http://127.0.0.1:8000/all-users").then((res) => {
+      res.data.users.map((user) => {
+        if (user.username === loggedInUser) {
+          setUser(user);
+        }
+      });
+    });
+  };
+  const handleBookingRequest = async () => {
+    if (loggedInUser === "") {
+      alert("Please login to book this tour");
+    }
+    let user = user.username;
+    let name = packName;
+    let packId = selector?.packId;
+    let destination = selector?.destination;
+    let numofdays = selector?.dayWiseItinerary.length;
+    let hotel = selector?.hotel;
+    let transport = selector?.transport;
+    let tourGuide = selector?.tourGuide;
+    let totPrice = selector?.totPrice;
+    let date = new Date();
+
+    let paymentStatus = "pending";
+    let bookingStatus = "pending";
+    let bookingId = Math.floor(Math.random() * 1000000000);
+    let bookingRequest = {
+      user,
+      name,
+      packId,
+      destination,
+      numofdays,
+      hotel,
+      transport,
+      tourGuide,
+      totPrice,
+      date,
+      paymentStatus,
+      bookingStatus,
+      bookingId,
+    };
+    await axios(
+      "http://127.0.0.1:8000/add-booking-request",
+      bookingRequest
+    ).then((res) => {
+      if (res.data.message) {
+        alert("Booking request sent successfully");
+      }
+      alert("Something went wrong. Please try again later");
+    });
+  };
 
   useEffect(() => {
+    retrieveUser();
     retrievePackage();
   }, []);
   return packages
@@ -31,7 +88,6 @@ const TourDetail = () => {
       return pack.name === packName && index !== 0;
     })
     .map((pack) => {
-      // console.log(pack.dayWiseItinerary);
       return (
         <>
           <div className="tourDetailContainer">
@@ -154,6 +210,9 @@ const TourDetail = () => {
                 );
               })}
             </div>
+            <button id="tour-booking-btn" onClick={handleBookingRequest}>
+              Book This Tour
+            </button>
           </div>
         </>
       );

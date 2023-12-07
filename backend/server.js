@@ -181,11 +181,61 @@ const PackageSchema = new mongoose.Schema({
     type: Array,
   },
 });
+
+const BookingSchema = new mongoose.Schema({
+  bookingId: {
+    type: String,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
+  name: {
+    type: String,
+  },
+  packId: {
+    type: String,
+  },
+  destination: {
+    type: String,
+  },
+  numofdays: {
+    type: String,
+  },
+
+  hotel: {
+    type: String,
+  },
+  transport: {
+    type: String,
+  },
+  tourGuide: {
+    type: String,
+  },
+  totPrice: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  dayWiseItinerary: {
+    type: Array,
+  },
+  paymentStatus: {
+    type: String,
+  },
+  bookingStatus: {
+    type: String,
+  },
+});
+
 const User = mongoose.model("User", userSchema);
 const Hotel = mongoose.model("Hotel", hotelSchema);
 const TourGuide = mongoose.model("TourGuide", TourGuideSchema);
 const Room = mongoose.model("Room", RoomSchema);
 const Package = mongoose.model("Package", PackageSchema);
+const Booking = mongoose.model("Booking", BookingSchema);
 app.post("/register", async (req, res) => {
   const name = req.body.name;
   const username = req.body.username;
@@ -229,6 +279,10 @@ passport.use(
   )
 );
 
+app.get("/all-users", async (req, res) => {
+  const users = await User.find();
+  res.json({ users: users });
+});
 app.post("/login", passport.authenticate("local-login"), (req, res, next) => {
   // console.log(req.body);
   // login
@@ -521,6 +575,47 @@ app.get("/all-packages", async (req, res) => {
   res.json({ packages: packages });
 });
 
+app.post("/add-booking", async (req, res) => {
+  let name = req.body.name;
+  let packId = req.body.packId;
+  let destination = req.body.destination;
+  let numofdays = req.body.numofdays;
+  let hotel = req.body.hotel;
+  let transport = req.body.transport;
+  let tourGuide = req.body.tourGuide;
+  let totPrice = req.body.totPrice;
+  let date = req.body.date;
+  let dayWiseItinerary = req.body.dayWiseItinerary;
+  let paymentStatus = req.body.paymentStatus;
+  let bookingStatus = req.body.bookingStatus;
+  let bookingId = Math.floor(Math.random() * 1000000000);
+  const checkIfBookingExists = await Booking.findOne({ packId: packId });
+  if (checkIfBookingExists) {
+    return res.json({ message: "Booking already exist" });
+  }
+  try {
+    let booking = new Booking({
+      bookingId: bookingId,
+      name: name,
+      user: req.body.user,
+      packId: packId,
+      destination: destination,
+      numofdays: numofdays,
+      hotel: hotel,
+      transport: transport,
+      tourGuide: tourGuide,
+      totPrice: totPrice,
+      date: date,
+      dayWiseItinerary: dayWiseItinerary,
+      paymentStatus: paymentStatus,
+      bookingStatus: bookingStatus,
+    });
+    await booking.save();
+    res.json({ message: "Booking Added Successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
 });

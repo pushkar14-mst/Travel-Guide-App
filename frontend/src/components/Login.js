@@ -4,6 +4,9 @@ import axios from "axios";
 
 //import css file from style sheets directory
 import styles from "../style_sheets/Login.module.css";
+import { useDispatch } from "react-redux";
+import { adminActions } from "../store/admin-slice";
+import { loginManagementActions } from "../store/login-management";
 
 const Login = (props) => {
   const initialUserEnteredInfo = {
@@ -17,7 +20,7 @@ const Login = (props) => {
   );
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
-
+  const dispatch = useDispatch();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserEnteredInfo({ ...userEnteredInfo, [name]: value });
@@ -43,6 +46,7 @@ const Login = (props) => {
             console.log(err);
           });
         props.login(username);
+        dispatch(loginManagementActions.loginUser({ username }));
         props.history.push(`/profile/home/${response.data.user.username}`);
       })
       .catch((err) => {
@@ -63,6 +67,8 @@ const Login = (props) => {
         console.log(response.data);
         if (response.data.isAdmin === true) {
           alert("Admin Logged In Successfully");
+          dispatch(adminActions.setIsAdminActive());
+          props.history.push("/page/manager");
         } else if (response.data.isAdmin === false) {
           alert("You are not admin!");
         }
