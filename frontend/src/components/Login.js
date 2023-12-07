@@ -29,7 +29,7 @@ const Login = (props) => {
   const login = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:8000/login", {
+      .post("https://travel-guide-app-i1tf.vercel.app/login", {
         username: userEnteredInfo.user_name,
         password: userEnteredInfo.password,
       })
@@ -37,7 +37,9 @@ const Login = (props) => {
         console.log(response.data);
         let username = response.data.user.username;
         await axios
-          .post("http://127.0.0.1:8000/duo-auth", { username: username })
+          .post("https://travel-guide-app-i1tf.vercel.app/duo-auth", {
+            username: username,
+          })
           .then((response) => {
             // console.log(response.data.authUrl);
             window.open(response.data.authUrl, "_blank");
@@ -59,7 +61,7 @@ const Login = (props) => {
     setAdminEmail("");
     setAdminPassword("");
     await axios
-      .post("http://127.0.0.1:8000/admin-login", {
+      .post("https://travel-guide-app-i1tf.vercel.app/admin-login", {
         adminEmail,
         adminPassword,
       })
