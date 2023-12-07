@@ -12,16 +12,16 @@ const { ExtractJwt } = require("passport-jwt");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const nodemailer = require("nodemailer");
-// const { Client } = require("@duosecurity/duo_universal");
+const { Client } = require("@duosecurity/duo_universal");
 
 dotenv.config();
 
-// const duoClient = new Client({
-//   clientId: process.env.DUO_CLIENT_ID,
-//   clientSecret: process.env.DUO_CLIENT_SECRET,
-//   apiHost: process.env.DUO_HOST,
-//   redirectUrl: "http://localhost:8000/redirect",
-// });
+const duoClient = new Client({
+  clientId: process.env.DUO_CLIENT_ID,
+  clientSecret: process.env.DUO_CLIENT_SECRET,
+  apiHost: process.env.DUO_HOST,
+  redirectUrl: "https://travel-guide-app-pushkar14-mst.vercel.app/redirect",
+});
 
 app.use(
   session({
@@ -377,29 +377,29 @@ passport.use(
   )
 );
 
-// app.post("/duo-auth", async (req, res) => {
-//   const username = req.body.username;
-//   console.log("username coming for duo from client", username);
-//   // const password=req.body.password;
-//   if (!username) {
-//     return res.status(400).json({ message: "Missing username" });
-//   }
+app.post("/duo-auth", async (req, res) => {
+  const username = req.body.username;
+  console.log("username coming for duo from client", username);
+  // const password=req.body.password;
+  if (!username) {
+    return res.status(400).json({ message: "Missing username" });
+  }
 
-//   await duoClient.healthCheck();
-//   const state = duoClient.generateState();
-//   req.session.duo = { state, username };
-//   console.log(req.session);
-//   const authUrl = duoClient.createAuthUrl(username, state);
+  await duoClient.healthCheck();
+  const state = duoClient.generateState();
+  req.session.duo = { state, username };
+  console.log(req.session);
+  const authUrl = duoClient.createAuthUrl(username, state);
 
-//   res.json({ authUrl });
-// });
+  res.json({ authUrl });
+});
 
-// app.get("/redirect", async (req, res) => {
-//   console.log("duo callback");
-//   res.send(
-//     "Authenticated Successfully, Please close this tab and go back to the app"
-//   );
-// });
+app.get("/redirect", async (req, res) => {
+  console.log("duo callback");
+  res.send(
+    "Authenticated Successfully, Please close this tab and go back to the app"
+  );
+});
 app.post("/reset-password", (req, res) => {
   let email = req.body.email;
   // console.log(email);
