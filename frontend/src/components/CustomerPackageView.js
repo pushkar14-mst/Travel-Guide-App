@@ -21,9 +21,11 @@ const CustomerPackageView = () => {
   const dispatch = useDispatch();
 
   const getAllPackages = async () => {
-    await axios.get("http://127.0.0.1:8000/all-packages").then((res) => {
-      setPackages(res.data.packages);
-    });
+    await axios
+      .get("https://travel-guide-app.vercel.app/all-packages")
+      .then((res) => {
+        setPackages(res.data.packages);
+      });
   };
 
   useEffect(() => {

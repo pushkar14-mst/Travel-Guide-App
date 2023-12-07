@@ -28,14 +28,11 @@ const Signup = () => {
       };
 
       axios
-        .post(
-          "https://travel-guide-4onqfdc70-pushkar14-mst.vercel.app/register",
-          {
-            name: newUser.full_name,
-            username: newUser.user_name,
-            password: newUser.password,
-          }
-        )
+        .post("https://travel-guide-app.vercel.app/register", {
+          name: newUser.full_name,
+          username: newUser.user_name,
+          password: newUser.password,
+        })
         .then(() => {
           alert("Registration Successful!");
           history.push("/user/login");

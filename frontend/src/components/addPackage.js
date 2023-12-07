@@ -60,7 +60,7 @@ function AddPackage() {
     };
 
     await axios
-      .post("http://127.0.0.1:8000/add-package", newPackage)
+      .post("https://travel-guide-app.vercel.app/add-package", newPackage)
       .then(() => {
         alert("Package Added");
       })

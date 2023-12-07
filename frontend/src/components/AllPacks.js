@@ -17,15 +17,17 @@ export default class AllPacks extends Component {
     this.retrivePackages();
   }
   retrivePackages() {
-    axios.get("http://127.0.0.1:8000/all-packages").then((res) => {
-      if (res.data.success) {
-        this.setState({
-          packages: res.data.existingPackages,
-        });
+    axios
+      .get("https://travel-guide-app.vercel.app/all-packages")
+      .then((res) => {
+        if (res.data.success) {
+          this.setState({
+            packages: res.data.existingPackages,
+          });
 
-        console.log(this.state.packages);
-      }
-    });
+          console.log(this.state.packages);
+        }
+      });
   }
 
   onDelete(id) {

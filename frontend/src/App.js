@@ -60,9 +60,11 @@ const App = () => {
 
   async function logout() {
     setUserId(null);
-    await axios.get("http://localhost:8000/logout").then((response) => {
-      console.log(response.data);
-    });
+    await axios
+      .get("https://travel-guide-app.vercel.app/logout")
+      .then((response) => {
+        console.log(response.data);
+      });
   }
 
   return (

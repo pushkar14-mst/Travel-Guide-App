@@ -13,12 +13,14 @@ export default class AllTourguides extends Component {
     this.retriveTourguides();
   }
   retriveTourguides() {
-    axios.get("http://127.0.0.1:8000/all-tourguides").then((res) => {
-      this.setState({
-        tourguides: res.data.tourguides,
+    axios
+      .get("https://travel-guide-app.vercel.app/all-tourguides")
+      .then((res) => {
+        this.setState({
+          tourguides: res.data.tourguides,
+        });
+        console.log(this.state.tourguides);
       });
-      console.log(this.state.tourguides);
-    });
   }
 
   //delete data from database
