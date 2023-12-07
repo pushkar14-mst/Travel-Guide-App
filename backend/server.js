@@ -394,12 +394,12 @@ passport.use(
 //   res.json({ authUrl });
 // });
 
-app.get("/redirect", async (req, res) => {
-  console.log("duo callback");
-  res.send(
-    "Authenticated Successfully, Please close this tab and go back to the app"
-  );
-});
+// app.get("/redirect", async (req, res) => {
+//   console.log("duo callback");
+//   res.send(
+//     "Authenticated Successfully, Please close this tab and go back to the app"
+//   );
+// });
 app.post("/reset-password", (req, res) => {
   let email = req.body.email;
   // console.log(email);
