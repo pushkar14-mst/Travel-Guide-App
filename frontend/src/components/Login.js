@@ -29,7 +29,7 @@ const Login = (props) => {
   const login = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://travel-guide-app-i1tf.vercel.app/login", {
+      .post("https://travel-guide-4onqfdc70-pushkar14-mst.vercel.app/login", {
         username: userEnteredInfo.user_name,
         password: userEnteredInfo.password,
       })
@@ -61,10 +61,13 @@ const Login = (props) => {
     setAdminEmail("");
     setAdminPassword("");
     await axios
-      .post("https://travel-guide-app-i1tf.vercel.app/admin-login", {
-        adminEmail,
-        adminPassword,
-      })
+      .post(
+        "https://travel-guide-4onqfdc70-pushkar14-mst.vercel.app/admin-login",
+        {
+          adminEmail,
+          adminPassword,
+        }
+      )
       .then(async (response) => {
         console.log(response.data);
         if (response.data.isAdmin === true) {
