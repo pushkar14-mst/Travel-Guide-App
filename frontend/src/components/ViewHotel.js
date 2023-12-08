@@ -82,6 +82,9 @@ export default class ViewHotel extends Component {
       console.log(res.data.hotels);
       this.filterContent(res.data.hotels, searchTerm);
     });
+    if (searchTerm === " ") {
+      this.setState({ hotels: [] });
+    }
   };
 
   render() {
@@ -154,55 +157,56 @@ export default class ViewHotel extends Component {
             </div>
 
             <div className={styles.content}>
-              {this.state.hotels.map((hotels, index) => (
-                <>
-                  <div className={styles.box}>
-                    <div className={styles.left}>
-                      <h4>{hotels.name}</h4>
-                      <img
-                        src={hotels.image}
-                        className={styles.add}
-                        default={add}
-                      ></img>
-                    </div>
-                    <div class="right" className={styles.right}>
-                      <h4> {hotels.type} </h4>
-                      <div className={styles.rate}>
-                        <i className={styles.logo3}>
-                          <AiFillStar />
-                        </i>
-                        <i className={styles.logo3}>
-                          <AiFillStar />
-                        </i>
-                        <i className={styles.logo3}>
-                          <AiFillStar />
-                        </i>
-                        <i className={styles.logo3}>
-                          <AiFillStar />
-                        </i>
+              {this.state.hotels.length > 0 &&
+                this.state.hotels.map((hotels, index) => (
+                  <>
+                    <div className={styles.box}>
+                      <div className={styles.left}>
+                        <h4>{hotels.name}</h4>
+                        <img
+                          src={hotels.image}
+                          className={styles.add}
+                          default={add}
+                        ></img>
                       </div>
-                      <p> Excepteur sint occaecat cupidatat non proident.</p>
-                      <p>{hotels.location}</p>
-                      <h5>{hotels.price} / per Night</h5>
-                      {/* <button className={styles.flex1}>
+                      <div class="right" className={styles.right}>
+                        <h4> {hotels.type} </h4>
+                        <div className={styles.rate}>
+                          <i className={styles.logo3}>
+                            <AiFillStar />
+                          </i>
+                          <i className={styles.logo3}>
+                            <AiFillStar />
+                          </i>
+                          <i className={styles.logo3}>
+                            <AiFillStar />
+                          </i>
+                          <i className={styles.logo3}>
+                            <AiFillStar />
+                          </i>
+                        </div>
+                        <p> Excepteur sint occaecat cupidatat non proident.</p>
+                        <p>{hotels.location}</p>
+                        <h5>{hotels.price} / per Night</h5>
+                        {/* <button className={styles.flex1}>
               <span>Check Availability</span>
               <i className={styles.logo3}><FaArrowAltCircleRight/></i>
             </button> */}
 
-                      <Link
-                        to="/insert/hotel"
-                        type="submit"
-                        className={styles.flex1}
-                      >
-                        <span>Resevation</span>
-                        <i className={styles.logo3}>
-                          <FaArrowAltCircleRight />
-                        </i>
-                      </Link>
+                        <Link
+                          to="/insert/hotel"
+                          type="submit"
+                          className={styles.flex1}
+                        >
+                          <span>Resevation</span>
+                          <i className={styles.logo3}>
+                            <FaArrowAltCircleRight />
+                          </i>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </>
-              ))}
+                  </>
+                ))}
             </div>
           </div>
         </section>
