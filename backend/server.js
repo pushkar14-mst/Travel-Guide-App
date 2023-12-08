@@ -34,7 +34,11 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://travel-guide-app.vercel.app",
+  })
+);
 app.use(bodyParser.json());
 dotenv.config();
 const url = process.env.MONGO_ATLAS_URL;
