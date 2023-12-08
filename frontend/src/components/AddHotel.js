@@ -34,16 +34,9 @@ export default function AddHotel() {
   const hotel_location = selector.location;
   const hotel_price = selector.price;
   const hotel_no_of_rooms = selector.no_of_rooms;
-
+  const hotel_image = selector.hotelImage;
   function sendData(e) {
     e.preventDefault();
-    const newHotel = {
-      name,
-      type,
-      location,
-      price,
-      no_of_rooms,
-    };
 
     axios
       .post("https://travel-guide-app-i1tf.vercel.app/add-hotel", {
@@ -52,7 +45,7 @@ export default function AddHotel() {
         hotel_location,
         hotel_price,
         hotel_no_of_rooms,
-        hotelImage,
+        hotel_image,
       })
       .then((res) => {
         if (res.data.message) {
