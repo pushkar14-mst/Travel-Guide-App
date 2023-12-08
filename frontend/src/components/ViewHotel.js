@@ -159,7 +159,11 @@ export default class ViewHotel extends Component {
                   <div className={styles.box}>
                     <div className={styles.left}>
                       <h4>{hotels.name}</h4>
-                      <img src={add} className={styles.add}></img>
+                      <img
+                        src={hotels.image}
+                        className={styles.add}
+                        default={add}
+                      ></img>
                     </div>
                     <div class="right" className={styles.right}>
                       <h4> {hotels.type} </h4>

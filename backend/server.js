@@ -74,6 +74,9 @@ const hotelSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  image: {
+    type: String,
+  },
 });
 
 const TourGuideSchema = new mongoose.Schema({
@@ -466,6 +469,7 @@ app.post("/add-hotel", async (req, res) => {
   let hotel_type = req.body.hotel_type;
   let hotel_location = req.body.hotel_location;
   let hotel_price = req.body.hotel_price;
+  let hotel_image = req.body.hotel_image;
   // console.log(no_of_rooms, hotel_name, hotel_type, hotel_location, hotel_price);
   const checkIfHotelExist = await Hotel.findOne({ name: hotel_name });
   if (checkIfHotelExist) {
@@ -478,6 +482,7 @@ app.post("/add-hotel", async (req, res) => {
       type: hotel_type,
       location: hotel_location,
       price: hotel_price,
+      image: hotel_image,
     });
     await hotel.save();
     res.json({ message: "Restaurant Added Successfully" });

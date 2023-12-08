@@ -28,6 +28,7 @@ export default function AddHotel() {
   const [location, setlocation] = useState("");
   const [price, setprice] = useState("");
   const [no_of_rooms, setno_of_rooms] = useState("");
+  const [hotelImage, setHotelImage] = useState("");
   const hotel_name = selector.name;
   const hotel_type = selector.type;
   const hotel_location = selector.location;
@@ -51,6 +52,7 @@ export default function AddHotel() {
         hotel_location,
         hotel_price,
         hotel_no_of_rooms,
+        hotelImage,
       })
       .then((res) => {
         if (res.data.message) {
@@ -61,7 +63,16 @@ export default function AddHotel() {
         alert(err);
       });
   }
-  dispatch(hotelActions.addHotel({ name, type, location, price, no_of_rooms }));
+  dispatch(
+    hotelActions.addHotel({
+      name,
+      type,
+      location,
+      price,
+      no_of_rooms,
+      hotelImage,
+    })
+  );
   return (
     <div className={styles.body}>
       {/* navbar */}
@@ -263,6 +274,18 @@ export default function AddHotel() {
                     />
                   </div>
 
+                  <div className={`form-group text-left ${styles.input}`}>
+                    <input
+                      type="text"
+                      style={{ height: "50px" }}
+                      class="form-control"
+                      id="image"
+                      placeholder="Iamge Url"
+                      onChange={(e) => {
+                        setHotelImage(e.target.value);
+                      }}
+                    />
+                  </div>
                   <button type="submit" class={styles.subBtn}>
                     Submit
                   </button>
