@@ -22,6 +22,8 @@ import { hotelActions } from "../store/hotel-slice";
 
 export default function AddHotel() {
   const selector = useSelector((state) => state.hotel);
+  const selector2 = useSelector((state) => state.admin);
+
   const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [type, settype] = useState("");
@@ -35,7 +37,7 @@ export default function AddHotel() {
   const hotel_price = selector.price;
   const hotel_no_of_rooms = selector.no_of_rooms;
   const hotel_image = selector.hotelImage;
-  const isAdmin = selector.isAdmin;
+  const isAdmin = selector2.isAdmin;
   function sendData(e) {
     e.preventDefault();
 
