@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { packageActions } from "../store/package-slice";
 
 function AddPackage() {
+  const selector = useSelector((state) => state.admin);
+  const isAdmin = selector.isAdmin;
   const [name, setName] = useState("");
   const [packId, setPid] = useState("");
   const [destination, setDesti] = useState("");
@@ -69,7 +71,7 @@ function AddPackage() {
       });
   }
 
-  return (
+  return isAdmin === true ? (
     <div className="container" class="p-3 mb-2 bg-white">
       <form onSubmit={sendData}>
         <img
@@ -462,6 +464,10 @@ function AddPackage() {
         </p>
       </div>
       <div class="card-footer text-muted"></div>
+    </div>
+  ) : (
+    <div>
+      <h1>Access Denied</h1>
     </div>
   );
 }

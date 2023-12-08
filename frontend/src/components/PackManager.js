@@ -58,9 +58,9 @@ const PackManager = () => {
         <div className="ManagerCard" style={{ width: "24rem" }}>
           <div className="card-body1">
             <h5 className="card-title text-white">
-              <strong>Manage package details</strong>
+              <strong>Add Hotel</strong>
             </h5>
-            <Link to="/manage/AllPacks">
+            <Link to="/add/hotel">
               <button className="ManLetsgoo" type="button">
                 <i className="fa-solid fa-angles-right"></i>Lets go..
               </button>

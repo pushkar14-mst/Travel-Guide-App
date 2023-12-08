@@ -35,6 +35,7 @@ export default function AddHotel() {
   const hotel_price = selector.price;
   const hotel_no_of_rooms = selector.no_of_rooms;
   const hotel_image = selector.hotelImage;
+  const isAdmin = selector.isAdmin;
   function sendData(e) {
     e.preventDefault();
 
@@ -66,7 +67,7 @@ export default function AddHotel() {
       hotelImage,
     })
   );
-  return (
+  return isAdmin === true ? (
     <div className={styles.body}>
       {/* navbar */}
       <div className={styles.sidebar}>
@@ -294,6 +295,10 @@ export default function AddHotel() {
           </section>
         </main>
       </div>
+    </div>
+  ) : (
+    <div>
+      <h1>Access Denied</h1>
     </div>
   );
 }
