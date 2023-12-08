@@ -6,6 +6,7 @@ let initialState = {
   type: "",
   location: "",
   price: 0,
+  hotelImage: "",
 };
 const hotelSlice = createSlice({
   name: "hotel",
@@ -17,6 +18,7 @@ const hotelSlice = createSlice({
       state.type = action.payload.type;
       state.location = action.payload.location;
       state.price = action.payload.price;
+      state.hotelImage = action.payload.hotelImage;
       console.log(
         state.name,
         state.type,
