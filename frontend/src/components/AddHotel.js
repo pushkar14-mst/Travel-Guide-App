@@ -39,7 +39,7 @@ export default function AddHotel() {
     e.preventDefault();
 
     axios
-      .post("https://travel-guide-app-i1tf.vercel.app/add-hotel", {
+      .post("https://travel-guide-app.vercel.app/add-hotel", {
         hotel_name,
         hotel_type,
         hotel_location,
