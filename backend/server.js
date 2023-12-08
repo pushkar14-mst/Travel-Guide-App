@@ -469,7 +469,7 @@ app.post("/add-hotel", async (req, res) => {
   let hotel_type = req.body.hotel_type;
   let hotel_location = req.body.hotel_location;
   let hotel_price = req.body.hotel_price;
-  let hotel_image = req.body.hotel_image;
+  let hotel_image = req.body.hotelImage;
   // console.log(no_of_rooms, hotel_name, hotel_type, hotel_location, hotel_price);
   const checkIfHotelExist = await Hotel.findOne({ name: hotel_name });
   if (checkIfHotelExist) {
