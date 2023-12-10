@@ -12,13 +12,17 @@ import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import Button from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
+import StarIcon from "@mui/icons-material/Star";
 const TourDetail = () => {
   const [packages, setPackages] = React.useState([]);
+  const [starHovered, setStarHovered] = React.useState(null);
+  const [selectedStar, setSelectedStar] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const selector = useSelector((state) => state.package);
   const packName = selector?.name;
-  const loggedInUser = useSelector((state) => state.userLogin.username);
+  const packId = selector?.packId;
+  const loggedInUser = useSelector((state) => state.userLogin.user);
   // console.log(packId);
 
   const retrievePackage = async () => {
@@ -40,7 +44,7 @@ const TourDetail = () => {
       });
   };
   const handleBookingRequest = async () => {
-    if (loggedInUser === "") {
+    if (loggedInUser === null) {
       alert("Please login to book this tour");
     }
     let user = user.username;
@@ -53,7 +57,6 @@ const TourDetail = () => {
     let tourGuide = selector?.tourGuide;
     let totPrice = selector?.totPrice;
     let date = new Date();
-
     let paymentStatus = "pending";
     let bookingStatus = "pending";
     let bookingId = Math.floor(Math.random() * 1000000000);
@@ -82,7 +85,33 @@ const TourDetail = () => {
       alert("Something went wrong. Please try again later");
     });
   };
+  const handleStarHover = (index) => {
+    setStarHovered(index);
+  };
 
+  const handleStarLeave = () => {
+    setStarHovered(null);
+  };
+
+  const handleStarClick = async (index) => {
+    if (loggedInUser === null) {
+      return alert("Please login to rate this tour");
+    }
+    setSelectedStar(index);
+    await axios
+      .post(
+        `https://travel-guide-app.vercel.app/update-ratings/${packId}/${
+          index + 1
+        }`
+      )
+      .then((res) => {
+        if (res.data) {
+          alert("Rating updated successfully");
+        }
+        alert("Something went wrong. Please try again later");
+        setSelectedStar(null);
+      });
+  };
   useEffect(() => {
     retrieveUser();
     retrievePackage();
@@ -115,6 +144,33 @@ const TourDetail = () => {
                   <h1>{pack.dayWiseItinerary[1]?.cities.length}</h1>
                   <p>Cities</p>
                 </div>
+              </div>
+            </div>
+            <div className="add-ratings">
+              <div>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <span
+                    key={index}
+                    onMouseOver={() => handleStarHover(index)}
+                    onMouseLeave={handleStarLeave}
+                    onClick={() => handleStarClick(index)}
+                  >
+                    {starHovered !== null || selectedStar !== null ? (
+                      index <=
+                      (starHovered !== null ? starHovered : selectedStar) ? (
+                        <StarIcon />
+                      ) : (
+                        <StarOutlineOutlinedIcon />
+                      )
+                    ) : (
+                      <StarOutlineOutlinedIcon />
+                    )}
+                  </span>
+                ))}
+                <p>
+                  Selected Rating:{" "}
+                  {selectedStar !== null ? selectedStar + 1 : "None"}
+                </p>
               </div>
             </div>
             <div className="Facilities">

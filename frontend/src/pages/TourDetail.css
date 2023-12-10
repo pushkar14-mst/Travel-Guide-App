@@ -99,3 +99,16 @@
   margin-bottom: 2rem;
   cursor: pointer;
 }
+
+.add-ratings {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.add-ratings span {
+  margin: 10px;
+}
+.add-ratings span:nth-child(1) {
+  margin: 0%;
+}

@@ -184,6 +184,9 @@ const PackageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  ratings: {
+    type: Number,
+  },
   dayWiseItinerary: {
     type: Array,
   },
@@ -584,6 +587,16 @@ app.get("/all-packages", async (req, res) => {
   res.json({ packages: packages });
 });
 
+//update ratings
+app.get("/update-ratings/:packId/:ratings", async (req, res) => {
+  let packId = req.params.packId;
+  let ratings = Number(req.params.ratings);
+  User.findOne({ packId: packId }).then((package) => {
+    package.ratings += ratings;
+    package.save();
+    res.json({ message: "Your Ratings were added" });
+  });
+});
 app.post("/add-booking", async (req, res) => {
   let name = req.body.name;
   let packId = req.body.packId;
