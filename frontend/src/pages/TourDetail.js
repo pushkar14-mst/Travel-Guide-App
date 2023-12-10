@@ -41,6 +41,7 @@ const TourDetail = () => {
   //       });
   //     });
   // };
+
   const handleBookingRequest = async () => {
     let user = user.username;
     let name = packName;
@@ -102,7 +103,6 @@ const TourDetail = () => {
         if (res.data) {
           alert("Rating updated successfully");
         }
-        alert("Something went wrong. Please try again later");
         setSelectedStar(null);
       });
   };
@@ -115,6 +115,9 @@ const TourDetail = () => {
       return pack.name === packName && index !== 0;
     })
     .map((pack) => {
+      let avgRating =
+        pack.ratings.reduce((a, b) => a + b, 0) / pack.ratings.length;
+
       return (
         <>
           <div className="tourDetailContainer">
@@ -142,6 +145,9 @@ const TourDetail = () => {
             </div>
             <div className="add-ratings">
               <div>
+                <h1 style={{ textAlign: "left", fontWeight: "700" }}>
+                  Rated {avgRating.toFixed(2)} by {pack.ratings.length} users
+                </h1>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <span
                     key={index}

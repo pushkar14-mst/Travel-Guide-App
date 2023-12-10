@@ -103,7 +103,7 @@
 .add-ratings {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
 }
 
 .add-ratings span {
