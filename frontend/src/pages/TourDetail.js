@@ -103,6 +103,7 @@ const TourDetail = () => {
         if (res.data) {
           alert("Rating updated successfully");
         }
+        retrievePackage();
         setSelectedStar(null);
       });
   };
