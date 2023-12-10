@@ -588,7 +588,7 @@ app.get("/all-packages", async (req, res) => {
 });
 
 //update ratings
-app.get("/update-ratings", async (req, res) => {
+app.post("/update-ratings", async (req, res) => {
   let packId = req.body.packId;
   let ratings = Number(req.body.rating);
   Package.findOne({ _id: packId }).then((package) => {
