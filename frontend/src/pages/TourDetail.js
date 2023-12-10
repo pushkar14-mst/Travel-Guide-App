@@ -22,6 +22,7 @@ const TourDetail = () => {
   const selector = useSelector((state) => state.package);
   const packName = selector?.name;
   const packId = selector?.packId;
+
   const loggedInUser = useSelector((state) => state.userLogin.user);
   // console.log(packId);
 
@@ -101,8 +102,8 @@ const TourDetail = () => {
     await axios
       .post(
         `https://travel-guide-app.vercel.app/update-ratings/${packId}/${
-          index + 1
-        }`
+          loggedInUser._id
+        }/${index + 1}`
       )
       .then((res) => {
         if (res.data) {
