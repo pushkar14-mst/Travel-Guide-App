@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import StarIcon from "@mui/icons-material/Star";
+
 const TourDetail = () => {
   const [packages, setPackages] = React.useState([]);
   const [starHovered, setStarHovered] = React.useState(null);
@@ -21,7 +22,6 @@ const TourDetail = () => {
   const [user, setUser] = React.useState(null);
   const selector = useSelector((state) => state.package);
   const packName = selector?.name;
-  const packId = selector?.packId;
 
   const retrievePackage = async () => {
     await axios
@@ -88,8 +88,11 @@ const TourDetail = () => {
     setStarHovered(null);
   };
 
-  const handleStarClick = async (index) => {
+  const handleStarClick = async (index, packId) => {
     setSelectedStar(index);
+    if (packId === null) {
+      alert("Something went wrong. Please try again later");
+    }
     await axios
       .post(
         `https://travel-guide-app.vercel.app/update-ratings/${packId}/${
@@ -145,7 +148,7 @@ const TourDetail = () => {
                     key={index}
                     onMouseOver={() => handleStarHover(index)}
                     onMouseLeave={handleStarLeave}
-                    onClick={() => handleStarClick(index)}
+                    onClick={() => handleStarClick(index, pack.packId)}
                   >
                     {starHovered !== null || selectedStar !== null ? (
                       index <=
