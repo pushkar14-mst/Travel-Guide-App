@@ -148,7 +148,7 @@ const TourDetail = () => {
                     key={index}
                     onMouseOver={() => handleStarHover(index)}
                     onMouseLeave={handleStarLeave}
-                    onClick={() => handleStarClick(index, pack.packId)}
+                    onClick={() => handleStarClick(index, pack._id)}
                   >
                     {starHovered !== null || selectedStar !== null ? (
                       index <=

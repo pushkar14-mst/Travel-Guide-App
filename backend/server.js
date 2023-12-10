@@ -591,11 +591,11 @@ app.get("/all-packages", async (req, res) => {
 app.get("/update-ratings/:packId/:ratings", async (req, res) => {
   let packId = req.params.packId;
   let ratings = Number(req.params.ratings);
-  Package.findOne({ packId: packId }).then((package) => {
+  Package.findOne({ _id: packId }).then((package) => {
     let oldRatings = package.ratings;
     let newRatings = [...oldRatings, ratings];
     Package.updateOne(
-      { packId: packId },
+      { _id: packId },
       {
         $set: {
           ratings: newRatings,
