@@ -588,22 +588,22 @@ app.get("/all-packages", async (req, res) => {
 });
 
 //update ratings
-app.get("/update-ratings/:packId/:userId/:ratings", async (req, res) => {
+app.get("/update-ratings/:packId/:ratings", async (req, res) => {
   let packId = req.params.packId;
   let ratings = Number(req.params.ratings);
-  let userId = req.params.userId;
   Package.findOne({ packId: packId }).then((package) => {
-    let ratingsArray = package.ratings;
-    let userRating = ratingsArray.find((rating) => {
-      return rating.userId === userId;
+    let oldRatings = package.ratings;
+    let newRatings = [...oldRatings, ratings];
+    Package.updateOne(
+      { packId: packId },
+      {
+        $set: {
+          ratings: newRatings,
+        },
+      }
+    ).then((response) => {
+      res.json({ message: "Ratings updated successfully" });
     });
-    if (userRating) {
-      userRating.rating = ratings;
-    } else {
-      ratingsArray.push({ userId: userId, rating: ratings });
-    }
-    package.save();
-    res.json({ message: "ratings updated successfully" });
   });
 });
 app.post("/add-booking", async (req, res) => {

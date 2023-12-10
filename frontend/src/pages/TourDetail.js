@@ -23,9 +23,6 @@ const TourDetail = () => {
   const packName = selector?.name;
   const packId = selector?.packId;
 
-  const loggedInUser = useSelector((state) => state.userLogin.user);
-  // console.log(packId);
-
   const retrievePackage = async () => {
     await axios
       .get("https://travel-guide-app.vercel.app/all-packages")
@@ -33,21 +30,18 @@ const TourDetail = () => {
         setPackages(res.data.packages);
       });
   };
-  const retrieveUser = async () => {
-    await axios
-      .get("https://travel-guide-app.vercel.app/all-users")
-      .then((res) => {
-        res.data.users.map((user) => {
-          if (user.username === loggedInUser) {
-            setUser(user);
-          }
-        });
-      });
-  };
+  // const retrieveUser = async () => {
+  //   await axios
+  //     .get("https://travel-guide-app.vercel.app/all-users")
+  //     .then((res) => {
+  //       res.data.users.map((user) => {
+  //         if (user.username === loggedInUser) {
+  //           setUser(user);
+  //         }
+  //       });
+  //     });
+  // };
   const handleBookingRequest = async () => {
-    if (loggedInUser === null) {
-      alert("Please login to book this tour");
-    }
     let user = user.username;
     let name = packName;
     let packId = selector?.packId;
@@ -95,15 +89,12 @@ const TourDetail = () => {
   };
 
   const handleStarClick = async (index) => {
-    if (loggedInUser === null) {
-      return alert("Please login to rate this tour");
-    }
     setSelectedStar(index);
     await axios
       .post(
         `https://travel-guide-app.vercel.app/update-ratings/${packId}/${
-          loggedInUser._id
-        }/${index + 1}`
+          index + 1
+        }`
       )
       .then((res) => {
         if (res.data) {
@@ -114,7 +105,7 @@ const TourDetail = () => {
       });
   };
   useEffect(() => {
-    retrieveUser();
+    // retrieveUser();
     retrievePackage();
   }, []);
   return packages
