@@ -94,11 +94,10 @@ const TourDetail = () => {
       alert("Something went wrong. Please try again later");
     }
     await axios
-      .post(
-        `https://travel-guide-app.vercel.app/update-ratings/${packId}/${
-          index + 1
-        }`
-      )
+      .post("https://travel-guide-app.vercel.app/update-ratings", {
+        packId,
+        rating: index + 1,
+      })
       .then((res) => {
         if (res.data) {
           alert("Rating updated successfully");

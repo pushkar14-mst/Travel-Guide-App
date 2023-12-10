@@ -588,9 +588,9 @@ app.get("/all-packages", async (req, res) => {
 });
 
 //update ratings
-app.get("/update-ratings/:packId/:ratings", async (req, res) => {
-  let packId = req.params.packId;
-  let ratings = Number(req.params.ratings);
+app.get("/update-ratings", async (req, res) => {
+  let packId = req.body.packId;
+  let ratings = Number(req.body.rating);
   Package.findOne({ _id: packId }).then((package) => {
     let oldRatings = package.ratings;
     let newRatings = [...oldRatings, ratings];
@@ -602,6 +602,7 @@ app.get("/update-ratings/:packId/:ratings", async (req, res) => {
         },
       }
     ).then((response) => {
+      console.log(response);
       res.json({ message: "Ratings updated successfully" });
     });
   });
